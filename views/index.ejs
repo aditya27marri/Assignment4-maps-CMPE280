@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <title>Office Locations</title> 
+  <script src="http://maps.google.com/maps/api/js?sensor=false" 
+          type="text/javascript"></script>
+</head> 
+<body>
+  <div id="map" style="width: 1910px; height: 925px;"></div>
+
+  <script type="text/javascript">
+    var locations = [
+      ['Fremont, CA 94538', 37.542571, -121.993037, 001, 'RetailLocation', 10000000],
+      ['Newark, CA', 37.525400, -122.037764, 002, 'RetailLocation', 3000000],
+      ['4100-4198 Pleiades Pl,Union City, CA 94587', 37.587546, -122.066716, 003, 'RetailLocation', 120000000],
+      ['Burbank,Hayward, CA', 37.660284, -122.089396, 005, 'RetailLocation', 5000000],
+      ['Sugarloaf San Mateo, CA', 37.527798, -122.312989, 006, 'Distribution Facility', 300000],
+      ['San Carlos, CA', 37.492686, -122.249346, 007, 'RetailLocation', 3002000],
+      ['Santa Cruz County CA', 37.007888, -122.067355, 008, 'RetailLocation', 88999090],
+      ['Santa Clara County CA', 37.113164, -121.651485, 009, 'RetailLocation', 88999090],
+      ['Santa Cruz County CA', 37.006852, -122.064148, 010, 'Distribution Facility', 1000000],
+      ['Santa Clara, CA', 37.344717, -121.979666, 011, 'Call Center', 1000000],
+      ['Pleasanton, CA', 37.638625, -121.911430, 012, 'RetailLocation', 1000000],
+      ['Mission District San Francisco, CA', 37.753038, -122.423198, 013, 'HeadQuarters', 1000000],
+      ['Pacifica, CA', 37.594870, -122.473562, 014, 'RetailLocation', 50000],
+      ['Gilroy, CA', 36.995174, -121.602745, 015, 'RetailLocation', 50000]
+    ];
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 9,
+      center: new google.maps.LatLng(37.3393857, -121.8949555),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i, myPlace;
+
+    for (i = 0; i < locations.length; i++) {  
+
+        if(locations[i][4] == 'RetailLocation'){
+
+
+          var markerColor = "00FF7F";
+          var markerImage = new google.maps.MarkerImage(
+              "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"
+                  + markerColor, new google.maps.Size(21, 34),
+              new google.maps.Point(0, 0), new google.maps.Point(10, 34));
+          var markerShadow = new google.maps.MarkerImage(
+              "http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
+              new google.maps.Size(40, 37), new google.maps.Point(0, 0),
+              new google.maps.Point(12, 35));
+
+
+
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            icon : markerImage,
+            shadow : markerShadow,
+            title: locations[i][0],
+            map: map
+          });
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent(locations[i][0]);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+
+          var myPlace = new google.maps.Circle({
+            center : new google.maps.LatLng(locations[i][1], locations[i][2]),
+            radius : (locations[i][5])/5000,
+            /*radius : 5000,*/
+            strokeColor : "#0000FF",
+            strokeOpacity : 0.8,
+            strokeWeight : 2,
+            fillColor : "#0000FF",
+            fillOpacity : 0.4
+          });
+
+          myPlace.setMap(map);
+        }
+        else if(locations[i][4] == 'Call Center'){
+
+          var markerColor = "4682B4";
+          var markerImage = new google.maps.MarkerImage(
+              "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"
+                  + markerColor, new google.maps.Size(21, 34),
+              new google.maps.Point(0, 0), new google.maps.Point(10, 34));
+          var markerShadow = new google.maps.MarkerImage(
+              "http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
+              new google.maps.Size(40, 37), new google.maps.Point(0, 0),
+              new google.maps.Point(12, 35));
+
+
+
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            icon : markerImage,
+            shadow : markerShadow,
+            title: locations[i][0],
+            map: map
+          });
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent(locations[i][0]);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+
+        }
+        else if(locations[i][4] == 'HeadQuarters'){
+
+          var markerColor = "F5F5F5";
+          var markerImage = new google.maps.MarkerImage(
+              "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"
+                  + markerColor, new google.maps.Size(21, 34),
+              new google.maps.Point(0, 0), new google.maps.Point(10, 34));
+          var markerShadow = new google.maps.MarkerImage(
+              "http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
+              new google.maps.Size(40, 37), new google.maps.Point(0, 0),
+              new google.maps.Point(12, 35));
+
+
+
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            icon : markerImage,
+            shadow : markerShadow,
+            title: locations[i][0],
+            map: map
+          });
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent(locations[i][0]);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+          
+        }
+        else if(locations[i][4] == 'Distribution Facility'){
+
+          var markerColor = "FF6347";
+          var markerImage = new google.maps.MarkerImage(
+              "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"
+                  + markerColor, new google.maps.Size(21, 34),
+              new google.maps.Point(0, 0), new google.maps.Point(10, 34));
+          var markerShadow = new google.maps.MarkerImage(
+              "http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
+              new google.maps.Size(40, 37), new google.maps.Point(0, 0),
+              new google.maps.Point(12, 35));
+
+
+
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            /*icon : markerImage,
+            shadow : markerShadow,*/
+            title: locations[i][0],
+            map: map
+          });
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent(locations[i][0]);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+          
+        }
+
+
+    }
+  </script>
+</body>
+</html>
